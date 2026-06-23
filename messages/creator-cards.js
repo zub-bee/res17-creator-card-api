@@ -7,7 +7,6 @@ module.exports = {
   CARD_IS_DRAFT: 'Creator card not found',
   CARD_IS_PRIVATE: 'This card is private. An access code is required',
   INVALID_ACCESS_CODE: 'Invalid access code',
-  DUPLICATE_ACCESS_CODE: 'Access code already exists',
   DUPLICATE_SLUG: 'Slug already exists',
 
   // Success messages
