@@ -26,21 +26,21 @@ async function getCreatorCard(serviceData, options = {}) {
     // Rule 1: Does card exist and is it not deleted?
     const card = await CreatorCardRepo.findOne({ query: { slug: data.slug, deleted: null } });
     if (!card) {
-      throwAppError(CreatorCardMessages.CARD_NOT_FOUND, ERROR_CODE.NOTFOUND /* , 'NF01' */);
+      throwAppError(CreatorCardMessages.CARD_NOT_FOUND, ERROR_CODE.NF01);
     }
 
     // Rule 2: Is it a draft?
     if (card.status === 'draft') {
-      throwAppError(CreatorCardMessages.CARD_IS_DRAFT, ERROR_CODE.NOTFOUND /* , 'NF02' */);
+      throwAppError(CreatorCardMessages.CARD_IS_DRAFT, ERROR_CODE.NF02);
     }
 
     // Rule 3 & 4: Is it private?
     if (card.access_type === 'private') {
       if (!data.access_code) {
-        throwAppError(CreatorCardMessages.CARD_IS_PRIVATE, ERROR_CODE.PERMERR /* , 'AC03' */);
+        throwAppError(CreatorCardMessages.CARD_IS_PRIVATE, ERROR_CODE.AC03);
       }
       if (data.access_code !== card.access_code) {
-        throwAppError(CreatorCardMessages.INVALID_ACCESS_CODE, ERROR_CODE.PERMERR /* , 'AC04' */);
+        throwAppError(CreatorCardMessages.INVALID_ACCESS_CODE, ERROR_CODE.AC04);
       }
     }
 
