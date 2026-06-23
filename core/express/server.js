@@ -20,7 +20,7 @@ const expressEnums = require('./enums');
 function Server(serverConfig = {}) {
   const express = require('express');
   const { appLogger } = require('@app-core/logger');
-  const { ERROR_STATUS_CODE_MAPPING } = require('@app-core/errors');
+  const { ERROR_STATUS_CODE_MAPPING, ERROR_CODE } = require('@app-core/errors');
   const cors = require('cors');
   const { getClientIp } = require('request-ip');
   const app = express();
@@ -241,8 +241,14 @@ function Server(serverConfig = {}) {
 
         appLogger.error(requestLog, `error: ${statusCode} ${method} ${path}`);
 
+        const errorKey =
+          Object.keys(ERROR_CODE).find((key) => ERROR_CODE[key] === error.errorCode) ||
+          error.errorCode ||
+          'ERR';
+
         responseComponents.statusCode = statusCode;
         responseComponents.body.status = 'error';
+        responseComponents.body.code = errorKey;
         responseComponents.body.message = error.isApplicationError
           ? error.message
           : 'Some error occured.';
