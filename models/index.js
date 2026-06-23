@@ -1,7 +1,7 @@
 const Notification = require('./notification');
-const CreatorCards = require('./creator-cards');
+const CreatorCard = require('./creator-cards');
 
 module.exports = {
   Notification,
-  CreatorCards,
+  CreatorCard,
 };
