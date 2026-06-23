@@ -4,13 +4,13 @@ const { appLogger } = require('@app-core/logger');
 const resend = process.env.RESEND_TOKEN ? new Resend(process.env.RESEND_TOKEN) : null;
 
 function emailProvider({ recipient, subject, emailContent, attachments, logKey } = {}) {
-  if (!resend || (!process.env.ALLOW_ALL_EMAILS && !`${recipient}`.includes('@resilience17.com'))) {
+  if (!resend || !process.env.ALLOW_ALL_EMAILS) {
     return true;
   }
 
   resend.emails
     .send({
-      from: process.env.RESEND_SENDER_ADDRESS || 'noreply@finbuildr.com',
+      from: process.env.RESEND_SENDER_ADDRESS || 'noreply@example.com',
       to: recipient,
       subject,
       html: emailContent,

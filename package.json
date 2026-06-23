@@ -1,12 +1,12 @@
 {
-  "name": "profold-be-api",
+  "name": "creator-card-api",
   "version": "1.0.0",
-  "description": "Project Scaffold for R17 Projects",
+  "description": "REST API for managing digital creator cards with links, service rates, and access control",
   "main": "app.js",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "profold-be-api-1"
+    "url": "git@github.com:zub-bee/res17-creator-card-api.git"
   },
   "scripts": {
     "test": "set USE_MOCK_MODEL=1 && mocha --recursive --require dotenv/config",
@@ -15,7 +15,7 @@
     "sync-envs": "node sync-env-files"
   },
   "keywords": [],
-  "author": "Resilience17",
+  "author": "zub-bee",
   "license": "ISC",
   "dependencies": {
     "@app-core/errors": "file:core/errors",

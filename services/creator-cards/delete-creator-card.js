@@ -31,10 +31,9 @@ async function deleteCreatorCard(serviceData, options = {}) {
     // set deleted timestamp
     await CreatorCardRepo.deleteOne({ query: { slug: data.slug } });
 
-    // fetch updated deleted timestamp for response using native mongoose model
-    const deletedCard = await CreatorCardRepo.raw().findOne({ slug: data.slug });
-
-    response = serializeCard(deletedCard, { includeAccessCode: true });
+    // Return the card using the original data with the deleted timestamp
+    card.deleted = Date.now();
+    response = serializeCard(card, { includeAccessCode: true });
   } catch (error) {
     appLogger.errorX(error, 'delete-creator-card-error');
     throw error;
